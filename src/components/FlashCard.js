@@ -1,21 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './FlashCard.css';
 
-function FlashCard({ imageUrl, breed, getRandomDog }) {
-  const [flipped, setFlipped] = useState(false);
-
-  const handleFlip = () => {
-    setFlipped(!flipped);
-  };
-
-  const handleNext = () => {
-    setFlipped(false);
-    getRandomDog();
-  };
-
+function FlashCard({ imageUrl, breed }) {
   return (
     <div className="flashcard-container">
-      <div className={`flashcard ${flipped ? 'flipped' : ''}`} onClick={handleFlip}>
+      <div className="flashcard">
         <div className="front">
           {imageUrl && ( // Conditionally render image if imageUrl is not empty
             <img src={imageUrl} alt="Dog" style={{ maxWidth: '300px' }} />
@@ -25,9 +14,6 @@ function FlashCard({ imageUrl, breed, getRandomDog }) {
           <p>{breed}</p>
         </div>
       </div>
-      {flipped && (
-        <button onClick={handleNext} className="next-button">Next</button>
-      )}
     </div>
   );
 }
