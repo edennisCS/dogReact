@@ -116,8 +116,8 @@ function App() {
         <div className="button-group mt-3">
           {!answerRevealed && !correctAnswer && (
             <>
-              <button className="btn btn-primary" onClick={checkGuess}>Submit Guess</button>
               <button className="btn btn-info" onClick={toggleHint}>Hint</button>
+              <button className="btn btn-primary" onClick={checkGuess}>Submit Guess</button>
               <button className="btn btn-warning" onClick={revealAnswer}>Reveal Answer</button>
             </>
           )}
