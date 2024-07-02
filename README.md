@@ -8,8 +8,9 @@ This project is a simple web application built with React.js that allows users t
 ## Features
 
 - Display a random dog image fetched from the Dog CEO API.
-- Users can guess the breed of the displayed dog.
-- Flip the card to reveal the correct breed after guessing.
+- Users can guess the breed of the displayed dog using the drop down and submitting it.
+- Click for hints.
+- Click to reveal answer if you can't guess.
 - Click "Next" to load a new random dog image and start a new round.
 
 ## Technologies Used
