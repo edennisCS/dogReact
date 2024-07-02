@@ -1,5 +1,7 @@
 # Dog Breed Guessing Game
 
+![1000081411](https://github.com/edennisCS/dogReact/assets/18103357/d6ce9bcc-228a-4671-b244-7bef3bb36c83)
+
 Try it at: https://dog-react-ppce.vercel.app/
 ## Description
 
@@ -21,3 +23,6 @@ This project is a simple web application built with React.js that allows users t
 
 ## Acknowledgements
 - Dog CEO API for providing the dog images and breed information.
+
+  
+
