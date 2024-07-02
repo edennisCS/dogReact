@@ -97,7 +97,7 @@ function App() {
 
   return (
     <div className="App container">
-      <h1 className="small-title">Guess the Dog Breed!</h1>
+      <h1 className="small-title">Guess The Dog Breed!</h1>
       <FlashCard imageUrl={imageUrl} />
       <div className="mt-4">
         <label htmlFor="breedSelect" className="form-label">Select a Breed:</label>
