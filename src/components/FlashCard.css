@@ -14,15 +14,9 @@
     overflow: hidden; /* Clip overflow content */
   }
   
-  
   .front img {
-    width: auto; /* Allow image to maintain aspect ratio */
-    height: auto; /* Allow image to maintain aspect ratio */
-    max-width: 100%; /* Ensure image doesn't exceed container */
-    max-height: 100%; /* Ensure image doesn't exceed container */
-    object-fit: contain; /* Fit image inside the container */
+    width: 100%; /* Scale image to fit container width */
+    height: 100%; /* Scale image to fit container height */
+    object-fit: cover; /* Cover the entire container, may cut off edges */
     border-radius: 10px; /* Rounded corners for the image */
   }
-  
-
-  
