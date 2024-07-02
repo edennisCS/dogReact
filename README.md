@@ -17,6 +17,7 @@ This project is a simple web application built with React.js that allows users t
 
 - React.js
 - Axios for API requests
+- Bootstrap
 
 ## Acknowledgements
 - Dog CEO API for providing the dog images and breed information.
