@@ -63,10 +63,10 @@ function App() {
     const currentBreedLower = currentBreed.toLowerCase();
 
     if (selectedBreedLower === currentBreedLower) {
-      setFeedback(`Correct! You guessed the right breed: ${capitalizeFirstLetter(currentBreed)}`);
+      setFeedback(<span style={{ color: 'green' }}>Correct! You guessed the right breed: {capitalizeFirstLetter(currentBreed)}</span>);
       setCorrectAnswer(true);
     } else {
-      setFeedback('Incorrect.');
+      setFeedback(<span style={{ color: 'red' }}>Incorrect.</span>);
     }
 
     // Hide the hint after submitting the guess
@@ -90,7 +90,7 @@ function App() {
 
   const revealAnswer = () => {
     // Assuming 'currentBreed' is the correct answer variable
-    setFeedback(`The correct answer is: ${currentBreed}`);
+    setFeedback(`The correct answer is: ${capitalizeFirstLetter(currentBreed)}`);
     setAnswerRevealed(true);
     setShowHint(false);
   };
@@ -137,4 +137,3 @@ function App() {
 }
 
 export default App;
-
