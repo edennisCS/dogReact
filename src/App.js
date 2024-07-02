@@ -30,6 +30,7 @@ function App() {
     if (breeds.length > 0) {
       const randomBreed = breeds[Math.floor(Math.random() * breeds.length)];
       setCurrentBreed(capitalizeFirstLetter(randomBreed));
+      setImageUrl(''); // Clear imageUrl state here
 
       try {
         const response = await axios.get(`https://dog.ceo/api/breed/${randomBreed}/images/random`);
