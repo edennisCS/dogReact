@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%; /* Ensure container can stretch */
   }
   
   .flashcard {
@@ -10,13 +11,27 @@
     perspective: 1000px;
     cursor: pointer;
     position: relative; /* Ensure relative positioning for absolute children */
-    border-radius: 10px; /* Rounded corners */
-    overflow: hidden; /* Clip overflow content */
+    max-width: 100%; /* Allow container to stretch width */
+
+  }
+  
+  .front {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute; /* Position the front content absolutely */
+    backface-visibility: hidden; /* Ensure backface is not visible */
   }
   
   .front img {
-    width: 100%; /* Scale image to fit container width */
-    height: 100%; /* Scale image to fit container height */
-    object-fit: cover; /* Cover the entire container, may cut off edges */
+    display: block; /* Remove inline space around the image */
+    width: auto; /* Allow image to adjust its width */
+    height: auto; /* Allow image to adjust its height */
+    max-width: 100%; /* Ensure image doesn't exceed container width */
+    max-height: 100%; /* Ensure image doesn't exceed container height */
+    object-fit: contain; /* Fit image inside the container */
     border-radius: 10px; /* Rounded corners for the image */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: add a shadow for better visibility */
   }
