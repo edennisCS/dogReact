@@ -1,0 +1,62 @@
+.flashcard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .flashcard {
+    width: 300px; /* Fixed width */
+    height: 300px; /* Fixed height */
+    perspective: 1000px;
+    cursor: pointer;
+    position: relative; /* Ensure relative positioning for absolute children */
+    border-radius: 10px; /* Rounded corners */
+    overflow: hidden; /* Clip overflow content */
+  }
+  
+  .flashcard.flipped .front {
+    transform: rotateY(180deg);
+  }
+  
+  .flashcard.flipped .back {
+    transform: rotateY(0deg);
+  }
+  
+  .flashcard .front,
+  .flashcard .back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Ensure no overflow */
+  }
+  
+  .flashcard .front {
+    transform: rotateY(0deg);
+  }
+  
+  .flashcard .back {
+    transform: rotateY(-180deg);
+  }
+  
+  .front img {
+    width: auto; /* Allow image to maintain aspect ratio */
+    height: auto; /* Allow image to maintain aspect ratio */
+    max-width: 100%; /* Ensure image doesn't exceed container */
+    max-height: 100%; /* Ensure image doesn't exceed container */
+    object-fit: contain; /* Fit image inside the container */
+    border-radius: 10px; /* Rounded corners for the image */
+  }
+  
+  .next-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
