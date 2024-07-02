@@ -1,6 +1,8 @@
 # Dog Breed Guessing Game
 
-![1000081411](https://github.com/edennisCS/dogReact/assets/18103357/d6ce9bcc-228a-4671-b244-7bef3bb36c83)
+![1000081413](https://github.com/edennisCS/dogReact/assets/18103357/4ac44092-4f38-4b68-ba94-9b53c015b38d)
+
+
 
 Try it at: https://dog-react-ppce.vercel.app/
 ## Description
