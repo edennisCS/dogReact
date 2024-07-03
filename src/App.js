@@ -24,7 +24,7 @@ function App() {
   const [hintType, setHintType] = useState('last'); // Initialize hintType to 'first'
   const [answerRevealed, setAnswerRevealed] = useState(false);
   const [correctAnswer, setCorrectAnswer] = useState(false);
-  const [difficulty, setDifficulty] = useState(8); // Default difficulty level
+  const [difficulty, setDifficulty] = useState(4); // Default difficulty level
   const [gameStarted, setGameStarted] = useState(false);
 
   useEffect(() => {
@@ -122,14 +122,14 @@ function App() {
           <input 
             type="range" 
             id="difficultyRange"
-            min="8" 
+            min="4" 
             max={breeds.length} 
             value={difficulty} 
             onChange={handleDifficultyChange} 
             className="form-range" 
             style={{ width: '200px' }} 
           />
-          <span className="ms-2">Difficulty: {difficulty}</span>
+          <span className="ms-2">Breeds: {difficulty}</span>
           <div className="mt-3">
             <button className="btn btn-primary" onClick={startGame}>Start Game</button>
           </div>
