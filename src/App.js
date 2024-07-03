@@ -8,8 +8,14 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+function getRandomSubset(array, size) {
+  const shuffled = [...array].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, size);
+}
+
 function App() {
   const [breeds, setBreeds] = useState([]);
+  const [subsetBreeds, setSubsetBreeds] = useState([]);
   const [selectedBreed, setSelectedBreed] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [currentBreed, setCurrentBreed] = useState('');
@@ -36,6 +42,10 @@ function App() {
     if (breeds.length > 0) {
       const randomBreed = breeds[Math.floor(Math.random() * breeds.length)];
       setCurrentBreed(randomBreed);
+      
+      // Get a random subset of 15 breeds including the correct breed
+      const subset = getRandomSubset(breeds.filter(b => b !== randomBreed), 14);
+      setSubsetBreeds([...subset, randomBreed]);
 
       try {
         const response = await axios.get(`https://dog.ceo/api/breed/${randomBreed}/images/random`);
@@ -109,7 +119,7 @@ function App() {
           disabled={answerRevealed || correctAnswer}
         >
           <option value="">Select...</option>
-          {breeds.map(breed => (
+          {subsetBreeds.map(breed => (
             <option key={breed} value={breed}>{capitalizeFirstLetter(breed)}</option>
           ))}
         </select>
