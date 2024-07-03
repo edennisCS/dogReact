@@ -58,4 +58,125 @@ function App() {
       setSubsetBreeds([...subset, randomBreed]);
 
       try {
-        const response = await axios.get(`https://dog.ceo/api/breed/${randomBreed}/images
+        const response = await axios.get(`https://dog.ceo/api/breed/${randomBreed}/images/random`);
+        setImageUrl(response.data.message);
+      } catch (error) {
+        console.error('Error fetching dog image', error);
+      }
+    }
+  }, [breeds, difficulty]);
+
+  const handleBreedChange = (event) => {
+    const breed = event.target.value;
+    setSelectedBreed(breed);
+    setFeedback('');
+  };
+
+  const handleDifficultyChange = (event) => {
+    setDifficulty(Number(event.target.value));
+  };
+
+  const checkGuess = () => {
+    const selectedBreedLower = selectedBreed.toLowerCase();
+    const currentBreedLower = currentBreed.toLowerCase();
+
+    if (selectedBreedLower === currentBreedLower) {
+      setFeedback(<span style={{ color: 'green' }}>Correct! You guessed the right breed: {capitalizeFirstLetter(currentBreed)}</span>);
+      setCorrectAnswer(true);
+    } else {
+      setFeedback(<span style={{ color: 'red' }}>Incorrect.</span>);
+    }
+
+    // Hide the hint after submitting the guess
+    setShowHint(false);
+  };
+
+  const nextDog = () => {
+    setSelectedBreed('');
+    setFeedback('');
+    setShowHint(false); // Reset hint visibility on next dog
+    setHintType('first'); // Reset hint type on next dog
+    setAnswerRevealed(false); // Reset answer revealed state on next dog
+    setCorrectAnswer(false); // Reset correct answer state on next dog
+    getRandomDog();
+  };
+
+  const toggleHint = () => {
+    setShowHint(true);
+    setHintType(prevHintType => (prevHintType === 'first' ? 'last' : 'first'));
+  };
+
+  const revealAnswer = () => {
+    // Assuming 'currentBreed' is the correct answer variable
+    setFeedback(`The correct answer is: ${capitalizeFirstLetter(currentBreed)}`);
+    setAnswerRevealed(true);
+    setShowHint(false);
+  };
+
+  if (!gameStarted) {
+    return (
+      <div className="App container">
+        <h1 className="small-title">Guess The Dog Breed!</h1>
+        <div className="mt-4">
+          <label htmlFor="difficultyRange" className="form-label">Select Difficulty:</label>
+          <input 
+            type="range" 
+            id="difficultyRange"
+            min="8" 
+            max={breeds.length} 
+            value={difficulty} 
+            onChange={handleDifficultyChange} 
+            className="form-range" 
+            style={{ width: '200px' }} 
+          />
+          <span className="ms-2">Difficulty: {difficulty}</span>
+          <div className="mt-3">
+            <button className="btn btn-primary" onClick={startGame}>Start Game</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="App container">
+      <h1 className="small-title">Guess The Dog Breed!</h1>
+      <FlashCard imageUrl={imageUrl} />
+      <div className="mt-4">
+        <label htmlFor="breedSelect" className="form-label">Select a Breed:</label>
+        <select
+          id="breedSelect"
+          className="form-select"
+          value={selectedBreed}
+          onChange={handleBreedChange}
+          disabled={answerRevealed || correctAnswer}
+        >
+          <option value="">Select...</option>
+          {subsetBreeds.map(breed => (
+            <option key={breed} value={breed}>{capitalizeFirstLetter(breed)}</option>
+          ))}
+        </select>
+        <div className="button-group mt-3">
+          {!answerRevealed && !correctAnswer && (
+            <>
+              <button className="btn btn-info" onClick={toggleHint}>Hint</button>
+              <button className="btn btn-primary" onClick={checkGuess}>Submit Guess</button>
+              <button className="btn btn-warning" onClick={revealAnswer}>Reveal Answer</button>
+            </>
+          )}
+          <button className="btn btn-secondary" onClick={nextDog}>Next</button>
+        </div>
+        {showHint && (
+          <p className="mt-3">
+            Hint: {hintType === 'first'
+              ? `First letter is "${currentBreed.charAt(0).toUpperCase()}"`
+              : `Last letter is "${currentBreed.charAt(currentBreed.length - 1).toUpperCase()}"`}
+          </p>
+        )}
+        {feedback && <p className="mt-3">{feedback}</p>}
+      </div>
+    </div>
+  );
+}
+
+export default App;
