@@ -53,9 +53,9 @@ function App() {
       setCurrentBreed(randomBreed);
       
       // Get a random subset of breeds including the correct breed based on difficulty
-      const subsetSize = Math.min(difficulty, breeds.length - 1);
+      const subsetSize = Math.min(difficulty - 1, breeds.length - 1);
       const subset = getRandomSubset(breeds.filter(b => b !== randomBreed), subsetSize);
-      setSubsetBreeds([...subset, randomBreed]);
+      setSubsetBreeds([...subset, randomBreed].sort(() => 0.5 - Math.random()));
 
       try {
         const response = await axios.get(`https://dog.ceo/api/breed/${randomBreed}/images/random`);
