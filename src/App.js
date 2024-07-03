@@ -25,6 +25,7 @@ function App() {
   const [answerRevealed, setAnswerRevealed] = useState(false);
   const [correctAnswer, setCorrectAnswer] = useState(false);
   const [difficulty, setDifficulty] = useState(8); // Default difficulty level
+  const [gameStarted, setGameStarted] = useState(false);
 
   useEffect(() => {
     async function fetchBreeds() {
@@ -38,6 +39,13 @@ function App() {
 
     fetchBreeds();
   }, []);
+
+  const startGame = () => {
+    if (breeds.length > 0) {
+      getRandomDog();
+      setGameStarted(true);
+    }
+  };
 
   const getRandomDog = useCallback(async () => {
     if (breeds.length > 0) {
@@ -57,12 +65,6 @@ function App() {
       }
     }
   }, [breeds, difficulty]);
-
-  useEffect(() => {
-    if (breeds.length > 0) {
-      getRandomDog();
-    }
-  }, [breeds, getRandomDog]);
 
   const handleBreedChange = (event) => {
     const breed = event.target.value;
@@ -111,21 +113,32 @@ function App() {
     setShowHint(false);
   };
 
+  if (!gameStarted) {
+    return (
+      <div className="App container">
+        <h1 className="small-title">Guess The Dog Breed!</h1>
+        <div className="mt-4">
+          <label htmlFor="difficultyRange" className="form-label">Select Difficulty:</label>
+          <input 
+            type="range" 
+            id="difficultyRange"
+            min="8" 
+            max={breeds.length} 
+            value={difficulty} 
+            onChange={handleDifficultyChange} 
+            className="form-range" 
+            style={{ width: '200px' }} 
+          />
+          <span className="ms-2">Difficulty: {difficulty}</span>
+          <button className="btn btn-primary mt-3" onClick={startGame}>Start Game</button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="App container">
-      <h1 className="small-title">
-        Guess The Dog Breed!
-        <input 
-          type="range" 
-          min="8" 
-          max={breeds.length} 
-          value={difficulty} 
-          onChange={handleDifficultyChange} 
-          className="form-range ms-3" 
-          style={{ width: '200px' }} 
-        />
-        <span className="ms-2">Difficulty: {difficulty}</span>
-      </h1>
+      <h1 className="small-title">Guess The Dog Breed!</h1>
       <FlashCard imageUrl={imageUrl} />
       <div className="mt-4">
         <label htmlFor="breedSelect" className="form-label">Select a Breed:</label>
