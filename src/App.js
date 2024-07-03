@@ -3,6 +3,7 @@ import axios from 'axios';
 import FlashCard from './components/FlashCard';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import Slider from 'react-slider';
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -72,9 +73,8 @@ function App() {
     setFeedback('');
   };
 
-  const handleDifficultyChange = (event) => {
-    setDifficulty(Number(event.target.value));
-    event.stopPropagation();
+  const handleDifficultyChange = (value) => {
+    setDifficulty(value);
   };
 
   const checkGuess = () => {
@@ -120,17 +120,18 @@ function App() {
       {!gameStarted ? (
         <div className="mt-4">
           <label htmlFor="difficultyRange" className="form-label">Select Difficulty:</label>
-          <input 
-            type="range" 
-            id="difficultyRange"
-            min="4" 
-            max={breeds.length} 
-            value={difficulty} 
-            onChange={handleDifficultyChange} 
-            className="form-range" 
-            style={{ width: '200px' }} 
-            onMouseDown={(event) => event.preventDefault()}
-          />
+          <div className="slider-container">
+              <Slider 
+                id="difficultyRange"
+                min={4} 
+                max={breeds.length} 
+                value={difficulty} 
+                onChange={handleDifficultyChange} 
+                className="react-slider" 
+                thumbClassName="thumb"
+                trackClassName="track"
+              />
+          </div>
           <span className="ms-2">Breeds: {difficulty}</span>
           <div className="mt-3">
             <button className="btn btn-primary" onClick={startGame}>Start Game</button>

@@ -30,4 +30,34 @@ button {
   gap: 10px; /* Adjust the gap value to your preference */
   margin-top: 20px; /* Optional: Adjust margin-top for additional spacing */
 }
+/* App.css */
+.slider-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
 
+.react-slider {
+  width: 200px;
+  height: 25px;
+}
+
+.react-slider .thumb {
+  height: 25px;
+  width: 25px;
+  background-color: #007bff;
+  cursor: grab;
+  border-radius: 50%;
+}
+
+.react-slider .track {
+  top: 50%;
+  transform: translateY(-50%);
+  height: 5px;
+  background: #ddd;
+}
+
+.react-slider .track-1 {
+  background: #007bff;
+}
