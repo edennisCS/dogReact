@@ -4,6 +4,8 @@ import FlashCard from './components/FlashCard';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import Slider from 'react-slider';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLightbulb, faCheck, faEye, faArrowRight, faPlay } from '@fortawesome/free-solid-svg-icons';
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -27,12 +29,14 @@ function App() {
   const [correctAnswer, setCorrectAnswer] = useState(false);
   const [difficulty, setDifficulty] = useState(4); // Default difficulty level
   const [gameStarted, setGameStarted] = useState(false);
+  const [pageReady, setPageReady] = useState(false); // Track if the page is ready
 
   useEffect(() => {
     async function fetchBreeds() {
       try {
         const response = await axios.get('https://dog.ceo/api/breeds/list/all');
         setBreeds(Object.keys(response.data.message));
+        setPageReady(true); // Set pageReady to true once breeds are fetched
       } catch (error) {
         console.error('Error fetching breeds', error);
       }
@@ -99,6 +103,7 @@ function App() {
     setHintType('first'); // Reset hint type on next dog
     setAnswerRevealed(false); // Reset answer revealed state on next dog
     setCorrectAnswer(false); // Reset correct answer state on next dog
+    setImageUrl(''); // Clear the current image
     getRandomDog();
   };
 
@@ -121,6 +126,7 @@ function App() {
         <div className="mt-4">
           <label htmlFor="difficultyRange" className="form-label">Select Difficulty:</label>
           <div className="slider-container">
+            {pageReady && (
               <Slider 
                 id="difficultyRange"
                 min={4} 
@@ -131,10 +137,13 @@ function App() {
                 thumbClassName="thumb"
                 trackClassName="track"
               />
+            )}
           </div>
           <span className="ms-2">Breeds: {difficulty}</span>
           <div className="mt-3">
-            <button className="btn btn-primary" onClick={startGame}>Start Game</button>
+            <button className="btn btn-primary" onClick={startGame}>
+              <FontAwesomeIcon icon={faPlay} /> Start Game
+            </button>
           </div>
         </div>
       ) : (
@@ -157,12 +166,20 @@ function App() {
             <div className="button-group mt-3">
               {!answerRevealed && !correctAnswer && (
                 <>
-                  <button className="btn btn-info" onClick={toggleHint}>Hint</button>
-                  <button className="btn btn-primary" onClick={checkGuess}>Submit Guess</button>
-                  <button className="btn btn-warning" onClick={revealAnswer}>Reveal Answer</button>
+                  <button className="btn btn-info" onClick={toggleHint}>
+                    <FontAwesomeIcon icon={faLightbulb} /> Hint
+                  </button>
+                  <button className="btn btn-primary" onClick={checkGuess}>
+                    <FontAwesomeIcon icon={faCheck} /> Submit Guess
+                  </button>
+                  <button className="btn btn-warning" onClick={revealAnswer}>
+                    <FontAwesomeIcon icon={faEye} /> Reveal Answer
+                  </button>
                 </>
               )}
-              <button className="btn btn-secondary" onClick={nextDog}>Next</button>
+              <button className="btn btn-secondary" onClick={nextDog}>
+                <FontAwesomeIcon icon={faArrowRight} /> Next
+              </button>
             </div>
             {showHint && (
               <p className="mt-3">

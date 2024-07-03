@@ -55,9 +55,9 @@ button {
   top: 50%;
   transform: translateY(-50%);
   height: 5px;
-  background: #ddd;
+  background: #007bff;  /* Set the default (filled) track color */
 }
 
 .react-slider .track-1 {
-  background: #007bff;
+  background: #ddd;  /* Set the color for the track behind the thumb */
 }
