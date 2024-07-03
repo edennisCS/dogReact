@@ -24,6 +24,7 @@ function App() {
   const [hintType, setHintType] = useState('last'); // Initialize hintType to 'first'
   const [answerRevealed, setAnswerRevealed] = useState(false);
   const [correctAnswer, setCorrectAnswer] = useState(false);
+  const [difficulty, setDifficulty] = useState(8); // Default difficulty level
 
   useEffect(() => {
     async function fetchBreeds() {
@@ -43,8 +44,9 @@ function App() {
       const randomBreed = breeds[Math.floor(Math.random() * breeds.length)];
       setCurrentBreed(randomBreed);
       
-      // Get a random subset of 15 breeds including the correct breed
-      const subset = getRandomSubset(breeds.filter(b => b !== randomBreed), 14);
+      // Get a random subset of breeds including the correct breed based on difficulty
+      const subsetSize = Math.min(difficulty, breeds.length - 1);
+      const subset = getRandomSubset(breeds.filter(b => b !== randomBreed), subsetSize);
       setSubsetBreeds([...subset, randomBreed]);
 
       try {
@@ -54,7 +56,7 @@ function App() {
         console.error('Error fetching dog image', error);
       }
     }
-  }, [breeds]);
+  }, [breeds, difficulty]);
 
   useEffect(() => {
     if (breeds.length > 0) {
@@ -66,6 +68,10 @@ function App() {
     const breed = event.target.value;
     setSelectedBreed(breed);
     setFeedback('');
+  };
+
+  const handleDifficultyChange = (event) => {
+    setDifficulty(Number(event.target.value));
   };
 
   const checkGuess = () => {
@@ -107,7 +113,19 @@ function App() {
 
   return (
     <div className="App container">
-      <h1 className="small-title">Guess The Dog Breed!</h1>
+      <h1 className="small-title">
+        Guess The Dog Breed!
+        <input 
+          type="range" 
+          min="8" 
+          max={breeds.length} 
+          value={difficulty} 
+          onChange={handleDifficultyChange} 
+          className="form-range ms-3" 
+          style={{ width: '200px' }} 
+        />
+        <span className="ms-2">Difficulty: {difficulty}</span>
+      </h1>
       <FlashCard imageUrl={imageUrl} />
       <div className="mt-4">
         <label htmlFor="breedSelect" className="form-label">Select a Breed:</label>
