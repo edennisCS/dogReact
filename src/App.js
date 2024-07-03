@@ -130,7 +130,9 @@ function App() {
             style={{ width: '200px' }} 
           />
           <span className="ms-2">Difficulty: {difficulty}</span>
-          <button className="btn btn-primary mt-3" onClick={startGame}>Start Game</button>
+          <div className="mt-3">
+            <button className="btn btn-primary" onClick={startGame}>Start Game</button>
+          </div>
         </div>
       </div>
     );
