@@ -21,7 +21,7 @@ function App() {
   const [currentBreed, setCurrentBreed] = useState('');
   const [feedback, setFeedback] = useState('');
   const [showHint, setShowHint] = useState(false);
-  const [hintType, setHintType] = useState('last'); // Initialize hintType to 'first'
+  const [hintType, setHintType] = useState('first'); // Initialize hintType to 'first'
   const [answerRevealed, setAnswerRevealed] = useState(false);
   const [correctAnswer, setCorrectAnswer] = useState(false);
   const [difficulty, setDifficulty] = useState(4); // Default difficulty level
@@ -51,7 +51,7 @@ function App() {
     if (breeds.length > 0) {
       const randomBreed = breeds[Math.floor(Math.random() * breeds.length)];
       setCurrentBreed(randomBreed);
-      
+
       // Get a random subset of breeds including the correct breed based on difficulty
       const subsetSize = Math.min(difficulty - 1, breeds.length - 1);
       const subset = getRandomSubset(breeds.filter(b => b !== randomBreed), subsetSize);
@@ -74,6 +74,7 @@ function App() {
 
   const handleDifficultyChange = (event) => {
     setDifficulty(Number(event.target.value));
+    event.stopPropagation();
   };
 
   const checkGuess = () => {
@@ -128,6 +129,7 @@ function App() {
             onChange={handleDifficultyChange} 
             className="form-range" 
             style={{ width: '200px' }} 
+            onMouseDown={(event) => event.preventDefault()}
           />
           <span className="ms-2">Breeds: {difficulty}</span>
           <div className="mt-3">
