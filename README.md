@@ -1,6 +1,7 @@
 # The Dog Breed Guessing Game 🐶
 
-![1000081413](https://github.com/edennisCS/dogReact/assets/18103357/4ac44092-4f38-4b68-ba94-9b53c015b38d)
+![1000081434](https://github.com/edennisCS/dogReact/assets/18103357/738b3343-3983-4ed0-80a0-f59b1967d842)
+
 
 
 
