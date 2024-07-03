@@ -113,10 +113,10 @@ function App() {
     setShowHint(false);
   };
 
-  if (!gameStarted) {
-    return (
-      <div className="App container">
-        <h1 className="small-title">Guess The Dog Breed!</h1>
+  return (
+    <div className="App container">
+      <h1 className="small-title">Guess The Dog Breed!</h1>
+      {!gameStarted ? (
         <div className="mt-4">
           <label htmlFor="difficultyRange" className="form-label">Select Difficulty:</label>
           <input 
@@ -134,47 +134,44 @@ function App() {
             <button className="btn btn-primary" onClick={startGame}>Start Game</button>
           </div>
         </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="App container">
-      <h1 className="small-title">Guess The Dog Breed!</h1>
-      <FlashCard imageUrl={imageUrl} />
-      <div className="mt-4">
-        <label htmlFor="breedSelect" className="form-label">Select a Breed:</label>
-        <select
-          id="breedSelect"
-          className="form-select"
-          value={selectedBreed}
-          onChange={handleBreedChange}
-          disabled={answerRevealed || correctAnswer}
-        >
-          <option value="">Select...</option>
-          {subsetBreeds.map(breed => (
-            <option key={breed} value={breed}>{capitalizeFirstLetter(breed)}</option>
-          ))}
-        </select>
-        <div className="button-group mt-3">
-          {!answerRevealed && !correctAnswer && (
-            <>
-              <button className="btn btn-info" onClick={toggleHint}>Hint</button>
-              <button className="btn btn-primary" onClick={checkGuess}>Submit Guess</button>
-              <button className="btn btn-warning" onClick={revealAnswer}>Reveal Answer</button>
-            </>
-          )}
-          <button className="btn btn-secondary" onClick={nextDog}>Next</button>
-        </div>
-        {showHint && (
-          <p className="mt-3">
-            Hint: {hintType === 'first'
-              ? `First letter is "${currentBreed.charAt(0).toUpperCase()}"`
-              : `Last letter is "${currentBreed.charAt(currentBreed.length - 1).toUpperCase()}"`}
-          </p>
-        )}
-        {feedback && <p className="mt-3">{feedback}</p>}
-      </div>
+      ) : (
+        <>
+          <FlashCard imageUrl={imageUrl} />
+          <div className="mt-4">
+            <label htmlFor="breedSelect" className="form-label">Select a Breed:</label>
+            <select
+              id="breedSelect"
+              className="form-select"
+              value={selectedBreed}
+              onChange={handleBreedChange}
+              disabled={answerRevealed || correctAnswer}
+            >
+              <option value="">Select...</option>
+              {subsetBreeds.map(breed => (
+                <option key={breed} value={breed}>{capitalizeFirstLetter(breed)}</option>
+              ))}
+            </select>
+            <div className="button-group mt-3">
+              {!answerRevealed && !correctAnswer && (
+                <>
+                  <button className="btn btn-info" onClick={toggleHint}>Hint</button>
+                  <button className="btn btn-primary" onClick={checkGuess}>Submit Guess</button>
+                  <button className="btn btn-warning" onClick={revealAnswer}>Reveal Answer</button>
+                </>
+              )}
+              <button className="btn btn-secondary" onClick={nextDog}>Next</button>
+            </div>
+            {showHint && (
+              <p className="mt-3">
+                Hint: {hintType === 'first'
+                  ? `First letter is "${currentBreed.charAt(0).toUpperCase()}"`
+                  : `Last letter is "${currentBreed.charAt(currentBreed.length - 1).toUpperCase()}"`}
+              </p>
+            )}
+            {feedback && <p className="mt-3">{feedback}</p>}
+          </div>
+        </>
+      )}
     </div>
   );
 }
