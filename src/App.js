@@ -35,7 +35,8 @@ function App() {
     async function fetchBreeds() {
       try {
         const response = await axios.get('https://dog.ceo/api/breeds/list/all');
-        setBreeds(Object.keys(response.data.message));
+        const breedList = Object.keys(response.data.message).sort();
+        setBreeds(breedList);
         setPageReady(true); // Set pageReady to true once breeds are fetched
       } catch (error) {
         console.error('Error fetching breeds', error);
@@ -57,10 +58,14 @@ function App() {
       const randomBreed = breeds[Math.floor(Math.random() * breeds.length)];
       setCurrentBreed(randomBreed);
 
-      // Get a random subset of breeds including the correct breed based on difficulty
-      const subsetSize = Math.min(difficulty - 1, breeds.length - 1);
-      const subset = getRandomSubset(breeds.filter(b => b !== randomBreed), subsetSize);
-      setSubsetBreeds([...subset, randomBreed].sort(() => 0.5 - Math.random()));
+      if (difficulty === breeds.length) {
+        setSubsetBreeds(breeds);
+      } else {
+        // Get a random subset of breeds including the correct breed based on difficulty
+        const subsetSize = Math.min(difficulty - 1, breeds.length - 1);
+        const subset = getRandomSubset(breeds.filter(b => b !== randomBreed), subsetSize);
+        setSubsetBreeds([...subset, randomBreed].sort());
+      }
 
       try {
         const response = await axios.get(`https://dog.ceo/api/breed/${randomBreed}/images/random`);
