@@ -1,14 +1,14 @@
 # The Dog Breed Guessing Game 🐶
 
-![1000081434](https://github.com/edennisCS/dogReact/assets/18103357/738b3343-3983-4ed0-80a0-f59b1967d842)
 
+![dog_game](https://github.com/user-attachments/assets/867d7695-8726-459e-950f-79eb2462ba50)
 
 
 
 Try it at: https://dog-react-ppce.vercel.app/
 ## Description
 
-This project is a simple web application built with React.js that allows users to play a guessing game with dog breeds. Each round, a random dog image is displayed, and the user tries to guess the breed. The app fetches data from the Dog CEO API to retrieve dog images and breed information.
+This project is a simple web application built with React.js that lets users play a guessing game with dog breeds. Each round, a random dog image is displayed, and the user tries to guess the breed. The app fetches data from the Dog CEO API to retrieve dog images and breed information.
 
 ## Features
 
