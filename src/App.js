@@ -35,8 +35,7 @@ function App() {
     async function fetchBreeds() {
       try {
         const response = await axios.get('https://dog.ceo/api/breeds/list/all');
-        const breedList = Object.keys(response.data.message).sort();
-        setBreeds(breedList);
+        setBreeds(Object.keys(response.data.message));
         setPageReady(true); // Set pageReady to true once breeds are fetched
       } catch (error) {
         console.error('Error fetching breeds', error);
@@ -58,14 +57,10 @@ function App() {
       const randomBreed = breeds[Math.floor(Math.random() * breeds.length)];
       setCurrentBreed(randomBreed);
 
-      if (difficulty === breeds.length) {
-        setSubsetBreeds(breeds);
-      } else {
-        // Get a random subset of breeds including the correct breed based on difficulty
-        const subsetSize = Math.min(difficulty - 1, breeds.length - 1);
-        const subset = getRandomSubset(breeds.filter(b => b !== randomBreed), subsetSize);
-        setSubsetBreeds([...subset, randomBreed].sort());
-      }
+      // Get a random subset of breeds including the correct breed based on difficulty
+      const subsetSize = Math.min(difficulty - 1, breeds.length - 1);
+      const subset = getRandomSubset(breeds.filter(b => b !== randomBreed), subsetSize);
+      setSubsetBreeds([...subset, randomBreed].sort(() => 0.5 - Math.random()));
 
       try {
         const response = await axios.get(`https://dog.ceo/api/breed/${randomBreed}/images/random`);
@@ -182,9 +177,6 @@ function App() {
                   </button>
                 </>
               )}
-              <button className="btn btn-secondary" onClick={nextDog}>
-                <FontAwesomeIcon icon={faArrowRight} /> Next
-              </button>
             </div>
             {showHint && (
               <p className="mt-3">
@@ -194,6 +186,11 @@ function App() {
               </p>
             )}
             {feedback && <p className="mt-3">{feedback}</p>}
+            {(answerRevealed || correctAnswer) && (
+              <button className="btn btn-secondary mt-3" onClick={nextDog}>
+                <FontAwesomeIcon icon={faArrowRight} /> Next
+              </button>
+            )}
           </div>
         </>
       )}
