@@ -1,7 +1,7 @@
 # The Dog Breed Guessing Game 🐶
 
 
-![dog_game](https://github.com/user-attachments/assets/867d7695-8726-459e-950f-79eb2462ba50)
+![photo_2024-08-10_15-39-21](https://github.com/user-attachments/assets/cad19843-f40a-4f88-a256-15d0e07ff0d3)
 
 
 
