@@ -1,15 +1,16 @@
 .App {
   text-align: center;
-  font-family: 'Poppins', sans-serif; /* Updated font for a modern look */
+  font-family: 'Lora', sans-serif; /* Updated font for a modern look */
   background-color: #f4f4f9; /* Soft, neutral background color */
   padding: 20px; /* Add padding for better spacing */
   min-height: 100vh; /* Ensure the background color covers the entire viewport */
 }
 
 .small-title {
-  font-size: 2rem; /* Slightly larger for emphasis */
-  margin-top: 1.5rem;
+  font-size: 1.8rem; /* Slightly larger for emphasis */
+  margin-top: 1rem;
   margin-bottom: 1rem;
+  font-family: 'Poppins', sans-serif;
   color: #3b6978; /* Warm, inviting coral color */
   font-weight: 700; /* Bold font for strong emphasis */
 }
