@@ -185,12 +185,14 @@ function App() {
                   : `Last letter is "${currentBreed.charAt(currentBreed.length - 1).toUpperCase()}"`}
               </p>
             )}
-            {feedback && <p className="mt-3">{feedback}</p>}
-            {(answerRevealed || correctAnswer) && (
-              <button className="btn btn-secondary mt-3" onClick={nextDog}>
-                <FontAwesomeIcon icon={faArrowRight} /> Next
-              </button>
-            )}
+        <div className="feedback-section">
+          <p className="feedback-text">{feedback}</p>
+          {(answerRevealed || correctAnswer) && (
+            <button className="btn btn-secondary next-button" onClick={nextDog}>
+              <FontAwesomeIcon icon={faArrowRight} /> Next
+            </button>
+          )}
+        </div>
           </div>
         </>
       )}
