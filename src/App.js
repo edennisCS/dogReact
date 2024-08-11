@@ -56,23 +56,27 @@ useEffect(() => {
   };
 
   const getRandomDog = useCallback(async () => {
-    if (breeds.length > 0) {
-      const randomBreed = breeds[Math.floor(Math.random() * breeds.length)];
-      setCurrentBreed(randomBreed);
+  if (breeds.length > 0) {
+    const randomBreed = breeds[Math.floor(Math.random() * breeds.length)];
+    setCurrentBreed(randomBreed);
 
-      // Get a random subset of breeds including the correct breed based on difficulty
-      const subsetSize = Math.min(difficulty - 1, breeds.length - 1);
-      const subset = getRandomSubset(breeds.filter(b => b !== randomBreed), subsetSize);
-      setSubsetBreeds([...subset, randomBreed].sort(() => 0.5 - Math.random()));
+    // Get a random subset of breeds including the correct breed based on difficulty
+    const subsetSize = Math.min(difficulty - 1, breeds.length - 1);
+    const subset = getRandomSubset(breeds.filter(b => b !== randomBreed), subsetSize);
 
-      try {
-        const response = await axios.get(`https://dog.ceo/api/breed/${randomBreed}/images/random`);
-        setImageUrl(response.data.message);
-      } catch (error) {
-        console.error('Error fetching dog image', error);
-      }
+    // Add the correct breed to the subset and sort the subset alphabetically
+    const sortedSubset = [...subset, randomBreed].sort();
+
+    setSubsetBreeds(sortedSubset);
+
+    try {
+      const response = await axios.get(`https://dog.ceo/api/breed/${randomBreed}/images/random`);
+      setImageUrl(response.data.message);
+    } catch (error) {
+      console.error('Error fetching dog image', error);
     }
-  }, [breeds, difficulty]);
+  }
+}, [breeds, difficulty]);
 
   const handleBreedChange = (event) => {
     const breed = event.target.value;
