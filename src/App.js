@@ -31,19 +31,22 @@ function App() {
   const [gameStarted, setGameStarted] = useState(false);
   const [pageReady, setPageReady] = useState(false); // Track if the page is ready
 
-  useEffect(() => {
-    async function fetchBreeds() {
-      try {
-        const response = await axios.get('https://dog.ceo/api/breeds/list/all');
-        setBreeds(Object.keys(response.data.message));
-        setPageReady(true); // Set pageReady to true once breeds are fetched
-      } catch (error) {
-        console.error('Error fetching breeds', error);
-      }
+  
+useEffect(() => {
+  async function fetchBreeds() {
+    try {
+      const response = await axios.get('https://dog.ceo/api/breeds/list/all');
+      const breedsArray = Object.keys(response.data.message);
+      breedsArray.sort(); // Sort the breeds alphabetically
+      setBreeds(breedsArray);
+      setPageReady(true); // Set pageReady to true once breeds are fetched
+    } catch (error) {
+      console.error('Error fetching breeds', error);
     }
+  }
 
-    fetchBreeds();
-  }, []);
+  fetchBreeds();
+}, []);
 
   const startGame = () => {
     if (breeds.length > 0) {
