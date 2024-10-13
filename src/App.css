@@ -8,8 +8,8 @@
 
 .small-title {
   font-size: 1.6rem; /* Slightly larger for emphasis */
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 0rem;
+  margin-bottom: 0.5rem;
   font-family: 'Poppins', sans-serif;
   color: #3b6978; /* Warm, inviting coral color */
   font-weight: 700; /* Bold font for strong emphasis */
@@ -66,4 +66,13 @@ button {
 
 .react-slider .track-1 {
   background: #ddd;  /* Set the color for the track behind the thumb */
+}
+
+.score-container {
+  width: 100%; /* Ensures it takes full width */
+  padding: 10px 0; /* Vertical padding */
+}
+
+#scoreDisplay, #highScoreDisplay {
+  font-size: 1rem; /* Adjust font size as needed */
 }
